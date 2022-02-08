@@ -11,11 +11,23 @@ use App\Models\CsvData;
 
 class CompanyController extends Controller
 {
-    public function index(){
-        $companies = Company::paginate(4);
-        //dd($companies);
-        return view('pages.home', compact('companies'));
+    public function index(Request $request){
+        $search = $request->input('q');
+        if($search!="" || $request->company){
+            $company = Company::where(function ($query) use ($search){
+                $query->where('code', 'like', '%'.$search.'%');
+            })->when($request->company, function($query, $company){
+                return $query->where('company', 'like', $company);
+            })->paginate(6);
+            $company->appends(['q' =>$search]);
+        }
+        else{
+            $company = Company::paginate(10);
+        }
+        return view('pages.home')->with('data',$company);
     }
+
+
     public function addCompany(){
         return view('pages.add-company');
     }

@@ -1,7 +1,19 @@
 @extends('main')
 @section('content')
 <div class="container-fluid">
-    <h1 class="mt-4">ALL COMPANIES</h1>
+    <form action="">
+        <div class="row">
+            <select name="company" class="form-select">
+                <option value="" selected disabled>--Select company--</option>
+                @foreach ($data as $company)
+                    <option  value="{{$company['company']}}">{{$company['company']}}</option>
+                @endforeach
+            </select>
+                <input type="text" name="q" placeholder="Search company by code" class="form-select"/>
+                <input type="submit" class="btn btn-primary" value="Search"/>
+        </div>
+    </form>
+    {{$data->links()}}
     <table class="table table-bordered table-responsive">
         <tr>
             <th>Company name</th>
@@ -10,7 +22,7 @@
             <th>.....</th>
             <th>Activate</th>
         </tr>
-        @foreach($companies as $company)
+        @foreach($data as $company)
             <tr>
                 <th>{{$company->company}}</th>
                 <th>{{$company->code}}</th>
@@ -25,6 +37,6 @@
             </tr>
         @endforeach
     </table>
-    {{$companies->links()}}
+    
 </div>
 @endsection

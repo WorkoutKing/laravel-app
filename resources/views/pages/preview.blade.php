@@ -8,7 +8,8 @@
         <a href="/" class="btn alert-danger">Cancel</a>
         </div>
     @foreach($file as $array)
-        <table class="table table-bordered table-responsive">
+        <div class="card">
+        <h2>Company information:</h2>
         @foreach($array as $company)
             <div class="card-body">
                 @if(Str::startsWith($company, 'http') === true)
@@ -20,7 +21,7 @@
 
             </div>
         @endforeach
-        </table>
+        </div>
     @endforeach
     </form>
 </div>
