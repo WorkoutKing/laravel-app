@@ -19,12 +19,13 @@ class CompanyController extends Controller
             $company = Company::where(function ($query) use ($search){
                 $query->where('code', 'like', '%'.$search.'%');
             })->when($request->company, function($query, $company){
-                return $query->where('company', $company);
+                return $query->where('company', 'like', '%'.$company.'%');
             })->when($request->date, function($query, $date){
                 return $query->orderBy('created_at', $date);
             })->paginate(6);
             $company->appends(['q' =>$search]);
         }
+        
         else{
             $company = Company::whereDate('created_at', Carbon::today()->toDateString())->paginate(5);
         }

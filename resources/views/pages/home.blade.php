@@ -3,17 +3,12 @@
 <div class="container-fluid">
     <form action="">
         <div class="row">
-            <select name="company" class="form-select">
-                <option value="company" selected disabled>--Select company--</option>
-                @foreach ($data as $company)
-                    <option  value="{{$company['company']}}">{{$company['company']}}</option>
-                @endforeach
-            </select>
+            <input type="text" name="company" placeholder="Search company by name" class="form-group"/>
                 <input type="text" name="q" placeholder="Search company by code" class="form-group"/>
                 <select name="date" class="form-select">
                     <option value="" selected disabled>--Sort by registration date--</option>
-                    <option value="asc">Newest</option>
-                    <option value="desc">Oldest</option>
+                    <option value="asc">Oldest</option>
+                    <option value="desc">Newest</option>
                 </select>
                 <input type="submit" class="btn btn-primary" value="Search"/>
         </div>
