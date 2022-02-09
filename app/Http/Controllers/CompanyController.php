@@ -8,26 +8,28 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Imports\CompaniesImport;
 use App\Models\CsvData;
+use Carbon\Carbon;
 
 class CompanyController extends Controller
 {
     public function index(Request $request){
+        
         $search = $request->input('q');
-        if($search!="" || $request->company){
+        if($search!="" || $request->company || $request->date){
             $company = Company::where(function ($query) use ($search){
                 $query->where('code', 'like', '%'.$search.'%');
             })->when($request->company, function($query, $company){
-                return $query->where('company', 'like', $company);
+                return $query->where('company', $company);
+            })->when($request->date, function($query, $date){
+                return $query->orderBy('created_at', $date);
             })->paginate(6);
             $company->appends(['q' =>$search]);
         }
         else{
-            $company = Company::paginate(10);
+            $company = Company::whereDate('created_at', Carbon::today()->toDateString())->paginate(5);
         }
         return view('pages.home')->with('data',$company);
     }
-
-
     public function addCompany(){
         return view('pages.add-company');
     }
