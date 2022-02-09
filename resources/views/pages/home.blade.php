@@ -1,18 +1,22 @@
 @extends('main')
 @section('content')
 <div class="container-fluid">
-    <form action="">
         <div class="row">
-            <input type="text" name="company" placeholder="Search company by name" class="form-group"/>
-                <input type="text" name="q" placeholder="Search company by code" class="form-group"/>
-                <select name="date" class="form-select">
+            <div class="col-md-12">
+               <form action=""> 
+                <div class="input-group">
+            <input  type="text" name="company" placeholder="Search by name" class="form-control"/>
+                <input type="text" name="q" placeholder="Search by code" class="form-control"/>
+                <select name="date" class="form-control">
                     <option value="" selected disabled>--Sort by registration date--</option>
                     <option value="asc">Oldest</option>
                     <option value="desc">Newest</option>
                 </select>
                 <input type="submit" class="btn btn-primary" value="Search"/>
+                </div>
+            </form>
         </div>
-    </form>
+</div>
     {{$data->links()}}
     <table class="table table-bordered table-responsive">
         <tr>
