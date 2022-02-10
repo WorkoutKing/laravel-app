@@ -9,9 +9,15 @@ use Illuminate\Support\Facades\Storage;
 use App\Imports\CompaniesImport;
 use App\Models\CsvData;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CompanyController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth',['except'=>['index','showCompany']]);
+    }
+
     public function index(Request $request){
         
         $search = $request->input('q');
@@ -27,10 +33,11 @@ class CompanyController extends Controller
         }
         
         else{
-            $company = Company::whereDate('created_at', Carbon::today()->toDateString())->paginate(5);
+            $company = Company::whereDate('created_at', Carbon::today()->toDateString())->paginate(6);
         }
         return view('pages.home')->with('data',$company);
     }
+
     public function addCompany(){
         return view('pages.add-company');
     }
@@ -46,7 +53,7 @@ class CompanyController extends Controller
             $path = $request->file('logo')->store('public/images');
             $fileName = str_replace('public/','',$path);
         }
-
+        
         Company::create([
             'company'=>request('company'),
             'code'=>request('code'),
@@ -54,22 +61,29 @@ class CompanyController extends Controller
             'address'=>request('address'),
             'director'=>request('director'),
             'description'=>request('description'),
-            'logo'=>$fileName
+            'logo'=>$fileName,
+            'user_id'=>Auth::id()
         ]);
         return redirect('/');
     }
 
     public function showCompany(Company $company){
+        //dd($company->comments);
         return view('pages.show-company', compact('company'));
     }
 
     public function deleteCompany(Company $company){
+        if(Gate::denies('delete-company',$company)){
+            abort(403, 'You dont have permissions!!');
+        }
         $company->delete();
         return redirect('/');
     }
 
     public function updateCompany(Company $company){
-
+        if(Gate::denies('edit-company',$company)){
+             abort(403, 'You dont have permissions!!');
+        }
         return view('pages.edit-company', compact('company'));
     }
 
@@ -85,6 +99,7 @@ class CompanyController extends Controller
         Company::where('id', $company->id)->update($request->only(['company','code','vat','address','director','description']));
         return redirect('/company/'.$company->id);
     }
+
     public function importCompany(){
         return view('pages.import');
     }

@@ -22,6 +22,7 @@ class CreateCompaniesTable extends Migration
             $table->string('director');
             $table->longText('description');
             $table->string('logo')->nullable();
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }

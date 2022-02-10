@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <h2 class="mt-4">Company information</h2>
         <div class="card" style="width: 30rem;">
-            <div class="card-body" style="background: lightgray">
+            <div class="card-body" >
                 <h2 class="card-title" style="color: darkgoldenrod">Company name: <p>{{$company->company}}</p></h2>
                 <div style="color: darkgreen">
                 <p class="card-text">Code: {{$company->code}}</p>
@@ -22,5 +22,24 @@
                 @endif
             </div>
         </div>
+        <form action="/company/{{$company->id}}/comment" method="post" enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+                <textarea name="body" class="form-control" placeholder="Comment"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Comment</button>
+            </div>
+        </form>
+        @if(count($company->comments))
+            <div>
+                <h3>Comments</h3>
+                    @foreach($company->comments as $comment)
+                        <li>{{$comment->user->name}}:
+                        {{$comment->body}}
+                    </li>
+                    @endforeach
+            </div>
+        @endif
     </div>
 @endsection

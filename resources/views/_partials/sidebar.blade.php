@@ -4,8 +4,8 @@
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/">HOME</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/add-company">ADD COMPANY</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/import">UPLOAD COMPANY</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+        <!--<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>-->
     </div>
 </div>
