@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ItemsController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,11 @@ Route::get('/import', [CompanyController::class, 'importCompany']);
 Route::post('/preview', [CompanyController::class, 'processImport']);
 Route::post('/', [CompanyController::class, 'importAdd']);
 Route::post('/company/{company}/comment',[CommentController::class, 'create']);
+Route::get('/show-items',[ItemsController::class, 'showItems']);
+Route::get('/add-items',[ItemsController::class, 'addItems']);
+Route::post('/stores',[ItemsController::class, 'storeItems']);
+
+
 
 
 Auth::routes();

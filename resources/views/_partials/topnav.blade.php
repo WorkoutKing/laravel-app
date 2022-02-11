@@ -11,8 +11,8 @@
                      {{Auth::user()->name}}
                 </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                       
                         <a class="dropdown-item" href="/logout">Logout</a>
+                        <a class="dropdown-item" href="#">Dashboard</a>
                 </li>
                 @else
                 <div class="row mx-md-n5">

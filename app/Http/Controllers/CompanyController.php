@@ -28,10 +28,9 @@ class CompanyController extends Controller
                 return $query->where('company', 'like', '%'.$company.'%');
             })->when($request->date, function($query, $date){
                 return $query->orderBy('created_at', $date);
-            })->paginate(6);
+            })->paginate(5);
             $company->appends(['q' =>$search]);
         }
-        
         else{
             $company = Company::whereDate('created_at', Carbon::today()->toDateString())->paginate(6);
         }
@@ -69,6 +68,7 @@ class CompanyController extends Controller
 
     public function showCompany(Company $company){
         //dd($company->comments);
+
         return view('pages.show-company', compact('company'));
     }
 
