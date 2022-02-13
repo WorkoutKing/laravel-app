@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ItemsController;
-
+use App\Models\Category;
+use App\Http\Controllers\CategoryController;
 
 
 /*
@@ -31,7 +32,16 @@ Route::post('/company/{company}/comment',[CommentController::class, 'create']);
 Route::get('/show-items',[ItemsController::class, 'showItems']);
 Route::get('/add-items',[ItemsController::class, 'addItems']);
 Route::post('/stores',[ItemsController::class, 'storeItems']);
-
+Route::get('/useritemlist',[ItemsController::class, 'useritemlist']);
+Route::get('/usercompanylist',[ItemsController::class, 'usercompanylist']);
+Route::get('/dashboard',[ItemsController::class,'dashboard']);
+Route::get('/add-category', [CategoryController::class, 'showAddCategory']);
+Route::post('/create-category', [CategoryController::class, 'create']);
+Route::get('/company-categories', [CategoryController::class, 'showCompanies']);
+Route::get('/updat/items/{items}',[ItemsController::class, 'updateItems']);
+Route::post('/updat/{items}',[ItemsController::class, 'storeUpdateItems']);
+Route::get('/delet/items/{items}',[ItemsController::class, 'deleteItems']);
+Route::get('/usercategorylist', [CategoryController::class, 'userCategoryList']);
 
 
 

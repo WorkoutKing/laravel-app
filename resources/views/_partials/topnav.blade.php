@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
         <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button>
@@ -8,11 +7,11 @@
                 @if(Auth::check())   
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     {{Auth::user()->name}}
+                     Hello,{{Auth::user()->name}}
                 </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/logout">Logout</a>
-                        <a class="dropdown-item" href="#">Dashboard</a>
+                        <a class="dropdown-item" href="/dashboard">Dashboard</a>
                 </li>
                 @else
                 <div class="row mx-md-n5">

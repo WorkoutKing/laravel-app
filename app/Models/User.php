@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Model\Companies;
+use App\Model\Items;
 
 class User extends Authenticatable
 {
@@ -46,4 +47,13 @@ class User extends Authenticatable
     public function companies(){
         return $this->hasMany(Company::class);
     }
+    public function items()
+    {
+        return $this->hasMany(Items::class);
+    }
+    public function category()
+    {
+        return $this->hasMany(Items::class);
+    }
+
 }

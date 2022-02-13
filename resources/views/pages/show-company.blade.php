@@ -11,6 +11,7 @@
                 <p class="card-text">Director: {{$company->director}}</p>
                 <p class="card-text">Address: {{$company->address}}</p>
                 <p class="card-text">Description: {{$company->description}}</p>
+                <p class="card-text">Category: {{$company->category->category}}</p>
                 </div>
             </div>
             <div class="card-footer">

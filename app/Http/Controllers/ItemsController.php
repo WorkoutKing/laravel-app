@@ -15,15 +15,9 @@ class ItemsController extends Controller
         $this->middleware('auth',['except'=>['showItems']]);
     }
 
-    public function showItems(Request $request, Company $company){
+    public function showItems(Request $request, Items $items){
         $itemsNames = Items::pluck('item_name')->toArray();
-        if( $request->input()){
-            $items = Items::when($request->date, function($query, $date){
-                return $query->orderBy('created_at', $date);
-            })->paginate(10);
-        } else {
-            $items = Items::whereDate('created_at', Carbon::today()->toDateString())->paginate(10);
-        }
+        $items = Items::paginate(10);
         return view('pages.show-items', compact('items', 'itemsNames', $items));
     }
     public function addItems(Company $company, Request $request){
@@ -40,6 +34,36 @@ class ItemsController extends Controller
             'price'=>request('price'),
             
         ]);
+        return redirect('/show-items');
+    }
+
+    public function useritemlist(Request $request){
+        $itemsNames = Items::pluck('item_name')->toArray();
+        $items = Items::paginate(1000000);
+        return view('pages.useritemslist', compact('items', 'itemsNames', $items));
+    }
+    
+    public function usercompanylist(Request $request, Company $company){
+        $company = Company::paginate(1000000);
+        return view('pages.usercompanylist', compact($company,'company'));
+    }
+
+    public function dashboard(){
+        return view('pages.dashboard');
+    }
+
+    public function storeUpdateItems(Items $items, Request $request){
+        Items::where('id', $items->id)->update($request->only(['item_name','description','price']));
+        return redirect('/show-items');
+    }
+
+    public function updateItems(Items $items, Company $company){
+        $companyId = Company::pluck('id','company')->toArray();
+        return view('pages.edit-item', compact('items','companyId'));
+    }
+
+    public function deleteItems(Items $items){
+        $items->delete();
         return redirect('/show-items');
     }
 }

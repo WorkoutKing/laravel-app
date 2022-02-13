@@ -11,6 +11,7 @@ use App\Models\CsvData;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Category;
 
 class CompanyController extends Controller
 {
@@ -32,13 +33,14 @@ class CompanyController extends Controller
             $company->appends(['q' =>$search]);
         }
         else{
-            $company = Company::whereDate('created_at', Carbon::today()->toDateString())->paginate(6);
+            $company = Company::paginate(6);
         }
         return view('pages.home')->with('data',$company);
     }
 
     public function addCompany(){
-        return view('pages.add-company');
+        $categories = Category::all();
+        return view('pages.add-company', compact('categories'));
     }
 
     public function storeCompany(Request $request){
@@ -61,7 +63,8 @@ class CompanyController extends Controller
             'director'=>request('director'),
             'description'=>request('description'),
             'logo'=>$fileName,
-            'user_id'=>Auth::id()
+            'user_id'=>Auth::id(),
+            'category_id' => request('category')
         ]);
         return redirect('/');
     }
@@ -80,11 +83,12 @@ class CompanyController extends Controller
         return redirect('/');
     }
 
-    public function updateCompany(Company $company){
+    public function updateCompany(Category $category, Company $company){
         if(Gate::denies('edit-company',$company)){
              abort(403, 'You dont have permissions!!');
         }
-        return view('pages.edit-company', compact('company'));
+        $categories = Category::all();
+        return view('pages.edit-company', compact('category', 'categories','company',$company));
     }
 
     public function storeUpdate(Company $company, Request $request){
@@ -96,7 +100,7 @@ class CompanyController extends Controller
             $fileName = str_replace('public/','',$path);
             Company::where('id',$company->id)->update(['logo'=>$fileName]);
         }
-        Company::where('id', $company->id)->update($request->only(['company','code','vat','address','director','description']));
+        Company::where('id', $company->id)->update($request->only(['company','code','vat','address','director','description','category_id']));
         return redirect('/company/'.$company->id);
     }
 
@@ -132,7 +136,9 @@ class CompanyController extends Controller
                 'address' =>$company[3],
                 'director' =>$company[4],
                 'description' =>$company[5],
-                'logo' =>$company[6]
+                'logo' =>$company[6],
+                'user_id' => Auth::id(),
+                'category_id' => $company[8]
             ]);
 
         }
