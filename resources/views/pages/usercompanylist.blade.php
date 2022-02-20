@@ -21,7 +21,7 @@
                 <th><a href="/company/{{$company->id}}">More info</th>
                     <th>
                         <ul>
-                            <li><a href="/delete/company/{{$company->id}}">delete</a></li>
+                            <li><a href="/delete/company/{{$company->id}}" onclick="return confirm('Are you sure you want to remove it?')">delete</a></li>
                             <li><a href="/update/company/{{$company->id}}">update</a></li>
                         </ul>
                     </th>

@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
     public function create(Request $request) {
         $validated = $request->validate([
-            'category' => 'required|between:2,50|regex:/^[\pL\s\-]+$/u'
+            'category' => 'required|unique:categories|between:2,50'
         ]);
         
         Category::create([
@@ -37,8 +37,8 @@ class CategoryController extends Controller
             
         ]);
 
-        return back()->with('success', 'Sekmingai ivesta kategorija');
-    }
+        return redirect('/');
+        }
 
     public function userCategoryList(Category $category, Company $company){
         $categories = Category::all();

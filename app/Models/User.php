@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Model\Companies;
 use App\Model\Items;
+use App\Model\Shopinghistory;
 
 class User extends Authenticatable
 {
@@ -54,6 +55,10 @@ class User extends Authenticatable
     public function category()
     {
         return $this->hasMany(Items::class);
+    }
+    public function shopinghistory()
+    {
+        return $this->hasMany(Shopinghistory::class);
     }
 
 }

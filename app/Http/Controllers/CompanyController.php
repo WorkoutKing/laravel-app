@@ -29,7 +29,7 @@ class CompanyController extends Controller
                 return $query->where('company', 'like', '%'.$company.'%');
             })->when($request->date, function($query, $date){
                 return $query->orderBy('created_at', $date);
-            })->paginate(5);
+            })->paginate(10);
             $company->appends(['q' =>$search]);
         }
         else{
@@ -125,7 +125,7 @@ class CompanyController extends Controller
         $dataFile = explode(PHP_EOL,$dataFile);
         $file = [];
         foreach ($dataFile as $data){
-            $file[] = explode(';', $data);
+            $file[] = explode(',', $data);
         }
         foreach ($file as $company){
 

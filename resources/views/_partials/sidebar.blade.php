@@ -8,6 +8,7 @@
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/company-categories">COMPANYS BY CATEGORY</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/add-items">CREATE ITEMS</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/show-items">SHOW ITEMS</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/shoping-history">SHOPING HISTORYS</a>
      <!--<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>-->
     </div>
 </div>

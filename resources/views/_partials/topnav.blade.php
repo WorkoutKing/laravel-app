@@ -7,7 +7,7 @@
                 @if(Auth::check())   
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown"  role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     Hello,{{Auth::user()->name}}
+                     Hello, <b style="text-transform: uppercase;">{{Auth::user()->name}}</b>
                 </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/logout">Logout</a>

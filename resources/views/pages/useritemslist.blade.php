@@ -17,7 +17,7 @@
                 <a href="/updat/items/{{$items->id}}" class="btn btn-success">UPDATE</a>
                 </div>
                 <div class="row">
-                <a href="/delet/items/{{$items->id}}" class="btn btn-danger">DELETE</a>
+                <a href="/delet/items/{{$items->id}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to remove it?')">DELETE</a>
                 </div>
                 </div>
             </div>

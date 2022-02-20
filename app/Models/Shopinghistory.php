@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Company;
-use App\Model\Shopinghistory;
+use App\Model\Items;
 
-class Items extends Model
+class Shopinghistory extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id','company_id','item_name','description','price'];
@@ -19,9 +19,8 @@ class Items extends Model
     public function company(){
         return $this->belongsTo(Company::class);
     }
-    public function shopinghistory(){
-        return $this->belongsTo(Shopinghistory::class);
+    public function items()
+    {
+        return $this->hasMany(Items::class);
     }
 }
-
-

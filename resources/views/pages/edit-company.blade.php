@@ -14,8 +14,8 @@
       <div class="form-group">
         <input type="text" class="form-control" name="vat" placeholder="PVM Code" value="{{$company->vat}}">
       </div>
-  <select name="category_id" class="form-select" value="{{$company->category}}">
-      <option value="" selected>--Select category--</option>
+  <select name="category_id" class="form-select" value="">
+      <option value="" selected>{{$company->category->category}}</option>
       @foreach ($categories as $category)
           <option value="{{$category->id}}">{{$category->category}}</option>
       @endforeach

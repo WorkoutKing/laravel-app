@@ -5,8 +5,6 @@ use App\Models\Items;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\Company;
-
-
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
