@@ -12,11 +12,13 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Category;
+use App\Http\Resources\CompaniesResource;
+
 
 class CompanyController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth',['except'=>['index','showCompany']]);
+        $this->middleware('auth',['except'=>['index','showCompany','companies', 'company']]);
     }
 
     public function index(Request $request){
@@ -125,7 +127,7 @@ class CompanyController extends Controller
         $dataFile = explode(PHP_EOL,$dataFile);
         $file = [];
         foreach ($dataFile as $data){
-            $file[] = explode(',', $data);
+            $file[] = explode(';', $data);
         }
         foreach ($file as $company){
 
@@ -143,6 +145,12 @@ class CompanyController extends Controller
 
         }
         return redirect('/');
+    }
+    public function companies(){
+        return CompaniesResource::collection(Company::paginate(5));
+    }
+    public function company(Company $company){
+        return new CompaniesResource($company);
     }
 }
 // duomenu importas
