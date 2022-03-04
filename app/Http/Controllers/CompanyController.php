@@ -146,11 +146,5 @@ class CompanyController extends Controller
         }
         return redirect('/');
     }
-    public function companies(){
-        return CompaniesResource::collection(Company::paginate(5));
-    }
-    public function company(Company $company){
-        return new CompaniesResource($company);
-    }
 }
 // duomenu importas
