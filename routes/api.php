@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/companies', [ApiController::class, 'companies']);
 Route::get('/company/{company}', [ApiController::class, 'company']);
+Route::post('/add-company', [ApiController::class, 'addCompany']);
 
 Route::post('login',[AuthController::class,'login']);
 Route::post('register',[AuthController::class,'register']);
