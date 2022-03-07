@@ -43,4 +43,16 @@ class ApiController extends Controller
         return response()
         ->json(['message' => 'Company created successfully']);
     }
+    public function userCompany(){
+        return CompaniesResource::collection(Company::all());
+    }
+
+    public function destroy($id)
+    {
+        $company = Company::find($id);
+        $company -> delete();
+
+        return response()->json('Successfully Deleted');
+        
+    }
 }

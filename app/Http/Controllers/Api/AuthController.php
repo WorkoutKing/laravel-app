@@ -39,6 +39,7 @@ class AuthController extends Controller
         return response()
             ->json(['message' => 'Hello' . " " . $user->name . " " . 'Your token' . ": " . $token,
             'name' => $user->name,
+            'id'=>$user->id,
         ]);
     }
     public function logout(Request $request){

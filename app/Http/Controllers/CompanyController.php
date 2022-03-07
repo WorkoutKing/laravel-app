@@ -127,7 +127,7 @@ class CompanyController extends Controller
         $dataFile = explode(PHP_EOL,$dataFile);
         $file = [];
         foreach ($dataFile as $data){
-            $file[] = explode(';', $data);
+            $file[] = explode(',', $data);
         }
         foreach ($file as $company){
 
