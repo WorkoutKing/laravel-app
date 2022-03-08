@@ -24,6 +24,8 @@ Route::get('/company/{company}', [ApiController::class, 'company']);
 Route::post('/add-company', [ApiController::class, 'addCompany']);
 Route::get('/user-company', [ApiController::class, 'userCompany']);
 Route::delete('/delete-company/{id}', [ApiController::class, 'destroy']);
+Route::post('/update/{id}', [ApiController::class, 'update']);
+
 
 
 Route::post('login',[AuthController::class,'login']);
