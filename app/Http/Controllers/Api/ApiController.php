@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class ApiController extends Controller
 {
     public function companies(){
-        return CompaniesResource::collection(Company::paginate(5));
+        return CompaniesResource::collection(Company::all());
     }
     public function company(Company $company){
         return new CompaniesResource($company);
@@ -60,12 +60,16 @@ class ApiController extends Controller
     public function update(Request $request, Company $company, $id)
     {
         $validator = Validator::make($request->all(),[
-            'company' => 'required|unique:companies|max:255',
-            'code'=>'required',
+            'company'=> 'min:3|max:255',
+            'code'=> 'min:3|max:10',
+            'vat'=> 'min:3|max:10',
+            'address'=> 'string|max:255',
+            'director'=> 'string',
+            'category_id'=> 'integer',
         ]);
 
         if($validator->fails()){
-            return response()->json($validator->errors());       
+            return response()->json($validator->errors());
         }
         $company = Company::find($id);
         $company->company = $request->get('company');
