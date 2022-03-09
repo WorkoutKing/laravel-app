@@ -8,6 +8,8 @@ use App\Http\Resources\CompaniesResource;
 use App\Models\Company;
 use Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
+use App\Http\Resources\CategoryResource;
 
 
 
@@ -19,16 +21,22 @@ class ApiController extends Controller
     public function company(Company $company){
         return new CompaniesResource($company);
     }
+    public function category(){
+        return CategoryResource::collection(Category::all());
+    }
     public function addCompany(Request $request){
         $validator = Validator::make($request->all(),[
-            'company' => 'required|unique:companies|max:255',
-            'code'=>'required',
+            'company'=> 'required|unique:companies|max:255',
+            'code'=> 'required',
+            'vat'=> 'required',
+            'address'=> 'required',
+            'director'=> 'required',
+            'description'=>'required',
+            'category_id'=> 'required',
         ]);
-
         if($validator->fails()){
             return response()->json($validator->errors());
         }
-
         Company::create([
             'company'=>request('company'),
             'code'=>request('code'),
@@ -63,8 +71,9 @@ class ApiController extends Controller
             'company'=> 'min:3|max:255',
             'code'=> 'min:3|max:10',
             'vat'=> 'min:3|max:10',
-            'address'=> 'string|max:255',
-            'director'=> 'string',
+            'address'=> 'string|min:3|max:255',
+            'director'=> 'string|min:3',
+            'description'=> 'string|min:3|max:255',
             'category_id'=> 'integer',
         ]);
 
